@@ -1,11 +1,16 @@
 "use client"
 import React from "react";
 import { useState } from "react";
+import Image from "next/image";
+
 function HomePage() {
 const [file, setFile] = useState();
 
   return (
     <div className="flex h-screen justify-center items-center">
+      <div className="bg-zinc-950 p-5"> 
+        <h1 className="text-center text-4xl my-4">Subir archivo</h1>
+     
     
       <form onSubmit={async(e) =>{
         e.preventDefault()
@@ -20,8 +25,8 @@ const [file, setFile] = useState();
        })
        const data = await res.json()
        console.log(data)
-      }} className="bg-zinc-800 p-5 ">
-        <h1 className="text-center text-4xl my-4">Subir archivo</h1>
+      }} >
+        
         
         <input type="file"className="bg-zinc-900 text-zinc-100 p-2 rounded block mb-2"
         onChange={(e)=>{
@@ -32,6 +37,15 @@ const [file, setFile] = useState();
         disabled={!file}
        >Subir</button>
       </form>
+      {
+        file && (
+          <Image src ={URL.createObjectURL(file)} alt ="upload file"
+          className="w-64 h-64 object-cover mx-auto"
+          width={256}
+          height={256}/>
+        )
+
+      }</div>
     </div>
   );
 }
